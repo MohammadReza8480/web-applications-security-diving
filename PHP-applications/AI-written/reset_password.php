@@ -12,8 +12,8 @@ if (!isset($_SESSION['reset_token'])) {
 $token = $_SESSION['reset_token'];
 
 // Retrieve new password from the form (if submitted)
-$new_password = $_POST['new_password'] ?? '';
-$confirm_password = $_POST['confirm_password'] ?? '';
+$new_password = $_POST['new_password'];
+$confirm_password = $_POST['confirm_password'];
 
 if (isset($_POST['submit'])) {
     // Check for empty fields

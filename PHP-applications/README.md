@@ -9,6 +9,8 @@ Three versions of a PHP web application: AI-written, Fully vulnerable, Secure
 - Change password: This operation allows users to change their password.
 - Change email: This operation allows users to change their email address.
 - Upload profile picture: This operation allows users to upload a profile picture.
+- Admin login: This operation allows admins to log in to their account.
+- Admin Dashboard: Only admins have access
 
-### Enjoy hacking!
+### I hope that was helpful
 

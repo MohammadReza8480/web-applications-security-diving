@@ -20,7 +20,7 @@ $row = mysqli_fetch_assoc($result);
 // Update email in the database
 if (isset($_POST['submit'])) {
     // Check for empty fields
-    if (empty($_POST['email']) || empty($_FILES['profile_picture'])) {
+    if (empty($_POST['email']) && empty($_FILES['profile_picture'])) {
         $_SESSION['error'] = "Please fill this form to edit account.";
         header("location: edit.php");
         exit();

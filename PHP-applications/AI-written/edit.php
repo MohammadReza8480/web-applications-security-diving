@@ -10,12 +10,7 @@ if (!isset($_SESSION['username'])) {
 // Database connection
 include("db_connect.php");
 
-// Fetch user data
 $username = $_SESSION['username'];
-$sql = "SELECT * FROM users WHERE username='$username'";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
-
 
 // Update email in the database
 if (isset($_POST['submit'])) {

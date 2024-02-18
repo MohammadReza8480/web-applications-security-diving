@@ -2,7 +2,6 @@
 
 // Start a session to store user information
 session_start();
-include "check_auth.php";
 // Connect to your database
 include("db_connect.php");
 
@@ -35,7 +34,6 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
 
     if (mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = "Registration successful!";
         header("location: login.php"); // Redirect to login page
     } else {
         $_SESSION['error'] = "Registration failed. Please try again.";

@@ -28,6 +28,8 @@ function deletePicture() {
             // Handle deletion error gracefully
             $_SESSION['error'] = "Error deleting image.";
         }
+    } else {
+        $_SESSION['error'] = "You don't have picture.";
     }
 }
 
@@ -98,7 +100,7 @@ if (isset($_POST['delete_picture'])) {
 <h1>Edit Account</h1>
 
 <div class="wrapper">
-    <form method="post" action="edit.php" enctype="multipart/form-data">
+    <form method="POST" action="edit.php" enctype="multipart/form-data">
         <h3>Email:</h3>
         <input type="email" name="email" placeholder="New Email" class="form-control"><br><br>
         <h3>Profile picture: </h3>
@@ -107,9 +109,7 @@ if (isset($_POST['delete_picture'])) {
             <input type="file" class="custom-file-input" name="profile_picture" id="profile_picture"><br><br>
         </div>
         <button type="submit" name="submit" class="btn btn-success btn-sm">Save Changes</button>
-    </form>
-    <form method="GET" action="edit.php">
-        <button type="submit" name="delete_picture" class="btn btn-danger ml-3 btn-sm">Delete Picture</button>
+        <button type="submit" name="delete_picture" class="btn btn-danger ml-3 btn-sm">Delete Picture</button><br><br>
     </form>
     <?php if (isset($_SESSION['error'])) { ?>
         <div class="alert alert-danger">

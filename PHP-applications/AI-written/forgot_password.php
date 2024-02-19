@@ -59,9 +59,7 @@ if (isset($_POST['submit'])) {
     <button type="submit" name="submit" class="btn btn-warning">Submit</button><br><br>
 </form>
 </div>
-<div class="wrapper">
-<?php if (isset($_SESSION['reset_link'])) {echo "<p>Your inbox</p>"; echo $_SESSION['reset_link']; unset($_SESSION['reset_link']);}?>
-</div>
+<?php if (isset($_SESSION['reset_link'])) {echo "<div class='wrapper'><p>Your inbox</p>"; echo $_SESSION['reset_link']; unset($_SESSION['reset_link']); echo "</div>";}?>
 </body>
 </html>
 

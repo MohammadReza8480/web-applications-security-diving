@@ -10,6 +10,27 @@ if (!isset($_SESSION['username'])) {
 // Database connection
 include("db_connect.php");
 
+function deletePicture() {
+    global $username, $conn;
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row['profile_picture'] !== "default_profile.png") {
+        $file_path = "uploads/".$row['profile_picture'];
+        if (unlink($file_path)) {
+            // File deleted successfully
+            // Update database entry if needed (prepared statements!)
+            $sql = "UPDATE users SET profile_picture='default_profile.png' WHERE username='$username'";
+            mysqli_query($conn, $sql);
+            $_SESSION['success'] = "Profile picture deleted successfully. <a href='profile.php'>profile</a>";
+        } else {
+            // Handle deletion error gracefully
+            $_SESSION['error'] = "Error deleting image.";
+        }
+    }
+}
+
 $username = $_SESSION['username'];
 
 // Update email in the database
@@ -35,6 +56,7 @@ if (isset($_POST['submit'])) {
         $max_size = 5 * 1024 * 1024; // 5MB
 
         if (in_array($file_type, $allowed_types) && $_FILES['profile_picture']['size'] <= $max_size) {
+            deletePicture(); // Delete the previous file
             // Generate a unique filename
             $new_filename = uniqid() . '.' . $file_type;
 
@@ -53,9 +75,10 @@ if (isset($_POST['submit'])) {
             $_SESSION['error'] = "Invalid file type or size. Please upload a JPG, JPEG, or PNG image smaller than 5MB.";
         }
     }
+}
 
-    // // Redirect to the profile page
-    // header("location: profile.php");
+if (isset($_POST['delete_picture'])) {
+    deletePicture();
 }
 
 ?>
@@ -84,7 +107,9 @@ if (isset($_POST['submit'])) {
             <input type="file" class="custom-file-input" name="profile_picture" id="profile_picture"><br><br>
         </div>
         <button type="submit" name="submit" class="btn btn-success btn-sm">Save Changes</button>
-        <button type="submit" name="delete_picture" class="btn btn-danger ml-3 btn-sm">Delete Picture</button><br><br>
+    </form>
+    <form method="GET" action="edit.php">
+        <button type="submit" name="delete_picture" class="btn btn-danger ml-3 btn-sm">Delete Picture</button>
     </form>
     <?php if (isset($_SESSION['error'])) { ?>
         <div class="alert alert-danger">

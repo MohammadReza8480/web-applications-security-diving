@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         header("location: edit.php");
         exit();
     }
-    $test = $_POST['email'];
+
     if ($_POST['email']) {
         $new_email = $_POST['email'];
         $sql = "UPDATE users SET email='$new_email' WHERE username='$username'";
@@ -72,10 +72,14 @@ if (isset($_POST['submit'])) {
 
             // Display a success message
             $_SESSION['success'] = "Profile picture updated successfully! <a href='profile.php'>profile</a>";
+            unset($_SESSION['error']);
         } else {
             // Display an error message
             $_SESSION['error'] = "Invalid file type or size. Please upload a JPG, JPEG, or PNG image smaller than 5MB.";
         }
+    }
+    if (($_POST['email']) && $_FILES['profile_picture']['error'] == 0) {
+        $_SESSION['success'] = "Email and profile picture updated successfully. <a href='profile.php'>profile</a>";
     }
 }
 

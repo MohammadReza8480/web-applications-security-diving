@@ -7,3 +7,6 @@ The AI-written applications are completely written using Google Bard, The vulner
 - Understand the impact of AI in application security by analyzing the "AI-written" versions.
 - Learn and implement secure coding practices by studying the "Secure" versions.
 - Benchmark your skills and track your progress as you navigate through the different versions.
+
+
+- Updating...
